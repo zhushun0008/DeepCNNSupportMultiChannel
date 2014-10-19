@@ -8,7 +8,7 @@ function net = cnnbp(net, y)
 
     %%  backprop deltas
     for j = 1 : numel(net.layers{n}.a)
-        net.layers{n}.d{j} =  net.e;   %  output delta
+        net.layers{n}.d{j} =  net.e(:,:,:,j);   %  output delta
     end
 
     for l = (n - 1) : -1 : 1

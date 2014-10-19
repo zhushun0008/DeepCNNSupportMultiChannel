@@ -1,7 +1,9 @@
 function net = cnnff(net, x)
     n = numel(net.layers);
-    net.layers{1}.a{1} = x;
-    inputmaps = 1;
+    inputmaps = net.layers{1}.inputmaps;
+    for i = 1: inputmaps
+        net.layers{1}.a{i} = x(:,:,:,i);
+    end
 
     for l = 2 : n   %  for each layer
         if strcmp(net.layers{l}.type, 'c')
@@ -36,7 +38,8 @@ function net = cnnff(net, x)
 
    
     net.o = [];
-   
-    net.o = net.layers{n}.a{1};
+   for i = 1:net.layers{n}.outputmaps
+       net.o(:,:,:,i) = net.layers{n}.a{i};
+   end
 
 end

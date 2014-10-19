@@ -1,6 +1,6 @@
 function net = cnnsetup(net, x, y)
-    inputmaps = 1;
-    mapsize = size(squeeze(x(:, :, 1)));
+    inputmaps = net.layers{1}.inputmaps;
+    mapsize = size(squeeze(x(:, :, 1, 1)));
     for l = 1 : numel(net.layers)   
         if strcmp(net.layers{l}.type, 'o')
             mapsize = mapsize - net.layers{l}.kernelsize + 1;
